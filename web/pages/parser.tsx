@@ -1,7 +1,7 @@
 "use client";
 
 import FileUploader from "@/components/file-uploader";
-import { Button } from "@nextui-org/button";
+import UrlUploader from "@/components/url-uploader";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import Image from "next/image";
 import { useState } from "react";
@@ -21,30 +21,12 @@ export default function Parser() {
                 onUpload={handleUpload}
             />
 
-            <div className="w-full max-w-md">
-                <Card>
-                    <CardHeader>
-                        <h2 className="text-lg font-semibold text-center">
-                            Enter URL
-                        </h2>
-                    </CardHeader>
-                    <CardBody>
-                        <input
-                            type="text"
-                            value={"test"}
-                            onChange={() => {}}
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="https://example.com"
-                        />
-                        <Button
-                            className="w-full mt-4 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
-                            onClick={() => {}}
-                        >
-                            Submit URL
-                        </Button>
-                    </CardBody>
-                </Card>
-            </div>
+            <UrlUploader
+                title={"Enter URL of QR Code"}
+                onUpload={(url) => {
+                    console.log(url);
+                }}
+            />
 
             {image && (
                 <div>
