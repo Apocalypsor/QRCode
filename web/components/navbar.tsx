@@ -1,10 +1,8 @@
-import { Logo, SearchIcon } from "@/components/icons";
+import { Logo } from "@/components/icons";
 
 import { ThemeSwitch } from "@/components/theme-switch";
 
 import { siteConfig } from "@/config/site";
-import { Input } from "@nextui-org/input";
-import { Kbd } from "@nextui-org/kbd";
 import {
     Navbar as NextUINavbar,
     NavbarBrand,
@@ -17,27 +15,6 @@ import clsx from "clsx";
 import NextLink from "next/link";
 
 export const Navbar = () => {
-    const searchInput = (
-        <Input
-            aria-label="Search"
-            classNames={{
-                inputWrapper: "bg-default-100",
-                input: "text-sm",
-            }}
-            endContent={
-                <Kbd className="hidden lg:inline-block" keys={["command"]}>
-                    K
-                </Kbd>
-            }
-            labelPlacement="outside"
-            placeholder="Search..."
-            startContent={
-                <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-            }
-            type="search"
-        />
-    );
-
     return (
         <NextUINavbar maxWidth="xl" position="sticky">
             <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
