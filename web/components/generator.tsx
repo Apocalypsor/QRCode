@@ -17,7 +17,7 @@ export default function Generator() {
             <Card className={"w-2/3 md:w-2/5"}>
                 <CardHeader>
                     <h2 className="text-lg font-semibold text-center">
-                        {"You can enter your text here"}
+                        {"You can enter text here"}
                     </h2>
                 </CardHeader>
                 <CardBody>
