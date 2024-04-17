@@ -44,7 +44,7 @@ export default function Parser() {
     const handleUrlUpload = async (url: string) => {
         setImage(null);
         setLoading(true);
-        url = "https://no-cors.apocalypse.workers.dev/?url=" + url;
+        url = "https://no-cors.apocalypse.workers.dev/" + url;
 
         const timeout = (ms: number) =>
             new Promise((_, reject) =>
