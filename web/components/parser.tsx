@@ -119,7 +119,11 @@ export default function Parser() {
                 </div>
             )}
 
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal
+                isOpen={isOpen}
+                onOpenChange={onOpenChange}
+                placement={"center"}
+            >
                 <ModalContent>
                     {(onClose) => (
                         <>
