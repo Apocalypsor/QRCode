@@ -54,7 +54,7 @@ export default function FileUploader({
                         />
                     </div>
                     <Button
-                        className="w-full mt-4 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
+                        className="w-full mt-4 bg-gradient-to-t from-[#FF1CF7] to-[#b249f8] text-white p-2 rounded-lg hover:bg-violet-800"
                         type="button"
                         onClick={handleUpload}
                         disabled={!file}

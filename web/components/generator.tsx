@@ -1,5 +1,6 @@
 "use client";
 
+import { title } from "@/components/primitives";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Textarea } from "@nextui-org/input";
@@ -12,7 +13,7 @@ export default function Generator() {
 
     return (
         <div className="flex flex-col items-center justify-center gap-4">
-            <h2 className={"text-3xl font-semibold"}>Generate QR Code</h2>
+            <h1 className={title({ color: "cyan" })}>Generate QR Code</h1>
 
             <Card className={"w-2/3 md:w-2/5"}>
                 <CardHeader>
@@ -28,7 +29,7 @@ export default function Generator() {
                         minRows={4}
                     />
                     <Button
-                        className="w-full mt-4 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
+                        className="w-full mt-4 bg-gradient-to-t from-[#00b7fa] to-[#01cfea] text-white p-2 rounded-lg hover:bg-cyan-800"
                         onClick={() => {
                             setImage(text);
                         }}

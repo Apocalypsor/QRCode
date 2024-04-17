@@ -48,7 +48,7 @@ export default function UrlUploader({
                         color={!isValidUrl ? "danger" : "default"}
                     />
                     <Button
-                        className="w-full mt-4 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
+                        className="w-full mt-4 bg-gradient-to-t from-[#5EA2EF] to-[#0072F5] text-white p-2 rounded-lg hover:bg-blue-800"
                         onClick={() => onUpload(url)}
                     >
                         Submit URL

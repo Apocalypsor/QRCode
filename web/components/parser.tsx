@@ -1,6 +1,7 @@
 "use client";
 
 import FileUploader from "@/components/file-uploader";
+import { title } from "@/components/primitives";
 import UrlUploader from "@/components/url-uploader";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
@@ -82,7 +83,12 @@ export default function Parser() {
 
     return (
         <div className={"flex flex-col items-center justify-center gap-4"}>
-            <h2 className={"text-3xl font-semibold"}>Parse images & URLs</h2>
+            <h1 className={title()}>
+                Parse&nbsp;
+                <span className={title({ color: "violet" })}>images&nbsp;</span>
+                and&nbsp;
+                <span className={title({ color: "blue" })}>URLs&nbsp;</span>
+            </h1>
 
             <div className="gap-4 hidden md:flex">{UploadCards}</div>
 
