@@ -40,7 +40,7 @@ export default function FileUploader({
                                 Select File
                                 <Input
                                     type="file"
-                                    accept="image/*"
+                                    accept="image/jpeg, image/png, image/jpg, image/webp"
                                     className="hidden"
                                     onChange={handleSelect}
                                 />

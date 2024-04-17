@@ -49,7 +49,7 @@ export default function UrlUploader({
                     />
                     <Button
                         className="w-full mt-4 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
-                        onClick={onUpload}
+                        onClick={() => onUpload(url)}
                     >
                         Submit URL
                     </Button>
