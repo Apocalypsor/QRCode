@@ -4,7 +4,7 @@ import { fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
@@ -13,10 +13,7 @@ export const metadata: Metadata = {
         template: `%s - ${siteConfig.name}`,
     },
     description: siteConfig.description,
-    themeColor: [
-        { media: "(prefers-color-scheme: light)", color: "white" },
-        { media: "(prefers-color-scheme: dark)", color: "black" },
-    ],
+
     icons: {
         icon: "/favicon.png",
         shortcut: "/favicon.png",
@@ -64,4 +61,13 @@ export default function RootLayout({
             </body>
         </html>
     );
+}
+
+export function generateViewport(): Viewport {
+    return {
+        themeColor: [
+            { media: "(prefers-color-scheme: light)", color: "white" },
+            { media: "(prefers-color-scheme: dark)", color: "black" },
+        ],
+    };
 }
