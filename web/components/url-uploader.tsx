@@ -27,8 +27,8 @@ export default function UrlUploader({
     }, [url]);
 
     return (
-        <div className="w-full max-w-md">
-            <Card>
+        <div className="w-full max-w-md p-4">
+            <Card className="p-2">
                 <CardHeader>
                     <h2 className="text-lg font-semibold text-center">
                         {title}
