@@ -130,7 +130,7 @@ export default function Parser() {
                 onOpenChange={onOpenChange}
                 placement={"center"}
             >
-                <ModalContent>
+                <ModalContent className="w-80 h-50">
                     {(onClose) => (
                         <>
                             <ModalHeader>
