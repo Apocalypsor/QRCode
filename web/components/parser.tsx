@@ -18,12 +18,20 @@ export default function Parser() {
         setImage(URL.createObjectURL(file));
     };
 
+    const handleUrlUpload = (url: string) => {
+        setParsedResult(
+            "123131232131231asfasfasfasf1231231231231231231232312321212.123123123123123",
+        );
+        setImage(url);
+    };
+
     return (
         <div className={"flex flex-col items-center justify-center gap-4"}>
             <h2 className={"text-3xl font-semibold"}>
                 Upload a image & Enter a URL
             </h2>
-            <div className="flex gap-4">
+
+            <div className="flex gap-4 hidden md:flex">
                 <FileUploader
                     title={"Upload Your QR Code"}
                     onUpload={handleUpload}
@@ -31,11 +39,22 @@ export default function Parser() {
 
                 <UrlUploader
                     title={"Enter URL of QR Code"}
-                    onUpload={(url) => {
-                        console.log(url);
-                    }}
+                    onUpload={handleUrlUpload}
                 />
             </div>
+
+            <div className={"flex flex-col gap-4 md:hidden"}>
+                <FileUploader
+                    title={"Upload Your QR Code"}
+                    onUpload={handleUpload}
+                />
+
+                <UrlUploader
+                    title={"Enter URL of QR Code"}
+                    onUpload={handleUrlUpload}
+                />
+            </div>
+
             {image && (
                 <div>
                     <Card>

@@ -1,19 +1,30 @@
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
-import { useState } from "react";
+import { Input } from "@nextui-org/input";
+import React, { useState } from "react";
 
 export default function UrlUploader({
     title,
     onUpload,
 }: {
     title: string;
-    onUpload: (url: string) => void;
+    onUpload: any;
 }) {
     const [url, setUrl] = useState<string>("");
 
     const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUrl(e.target.value);
     };
+
+    const isValidUrl = React.useMemo(() => {
+        if (url === "") return true;
+        try {
+            new URL(url);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }, [url]);
 
     return (
         <div className="w-full max-w-md">
@@ -24,16 +35,21 @@ export default function UrlUploader({
                     </h2>
                 </CardHeader>
                 <CardBody>
-                    <input
+                    <Input
+                        isClearable
                         type="text"
+                        variant="bordered"
+                        className={"w-full"}
                         value={url}
+                        onClear={() => setUrl("")}
                         onChange={handleUrlChange}
-                        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="https://example.com"
+                        isInvalid={!isValidUrl}
+                        color={!isValidUrl ? "danger" : "default"}
                     />
                     <Button
                         className="w-full mt-4 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
-                        onClick={() => {}}
+                        onClick={onUpload}
                     >
                         Submit URL
                     </Button>

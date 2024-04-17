@@ -1,5 +1,6 @@
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { Input } from "@nextui-org/input";
 import { useState } from "react";
 
 export default function FileUploader({
@@ -37,7 +38,7 @@ export default function FileUploader({
                         <Button className="w-1/3" type="button">
                             <label className="cursor-pointer">
                                 Select File
-                                <input
+                                <Input
                                     type="file"
                                     accept="image/*"
                                     className="hidden"
@@ -45,11 +46,11 @@ export default function FileUploader({
                                 />
                             </label>
                         </Button>
-                        <input
+                        <Input
                             type="text"
+                            variant={"faded"}
                             value={file ? file.name : "No File Selected"}
-                            className="w-full p-2 border border-gray-500 rounded-lg"
-                            readOnly
+                            isReadOnly
                         />
                     </div>
                     <Button
