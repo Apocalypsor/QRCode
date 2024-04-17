@@ -3,31 +3,39 @@
 import FileUploader from "@/components/file-uploader";
 import UrlUploader from "@/components/url-uploader";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { Divider } from "@nextui-org/divider";
 import Image from "next/image";
 import { useState } from "react";
 
 export default function Parser() {
-    const [image, setImage]: [string, any] = useState("");
+    const [parsedResult, setParsedResult] = useState<string | null>(null);
+    const [image, setImage] = useState<string | null>(null);
 
     const handleUpload = (file: File) => {
-        console.log(file);
+        setParsedResult(
+            "123131232131231asfasfasfasf1231231231231231231232312321212.123123123123123",
+        );
         setImage(URL.createObjectURL(file));
     };
 
     return (
         <div className={"flex flex-col items-center justify-center gap-4"}>
-            <FileUploader
-                title={"Upload Your QR Code Here"}
-                onUpload={handleUpload}
-            />
+            <h2 className={"text-3xl font-semibold"}>
+                Upload a image & Enter a URL
+            </h2>
+            <div className="flex gap-4">
+                <FileUploader
+                    title={"Upload Your QR Code"}
+                    onUpload={handleUpload}
+                />
 
-            <UrlUploader
-                title={"Enter URL of QR Code"}
-                onUpload={(url) => {
-                    console.log(url);
-                }}
-            />
-
+                <UrlUploader
+                    title={"Enter URL of QR Code"}
+                    onUpload={(url) => {
+                        console.log(url);
+                    }}
+                />
+            </div>
             {image && (
                 <div>
                     <Card>
@@ -35,10 +43,9 @@ export default function Parser() {
                             className={"flex flex-col break-words max-w-md"}
                         >
                             <b>Parsed Result</b>
-                            <p className="break-all">
-                                123131232131231asfasfasfasf1231231231231231231232312321212.123123123123123
-                            </p>
+                            <p className="break-all">{parsedResult}</p>
                         </CardHeader>
+                        <Divider />
                         <CardBody className="flex justify-center items-center p-4">
                             <div className="flex justify-center items-center overflow-hidden rounded-lg max-w-full">
                                 <Image

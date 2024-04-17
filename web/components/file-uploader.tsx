@@ -1,4 +1,5 @@
 import { Button } from "@nextui-org/button";
+import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { useState } from "react";
 
 export default function FileUploader({
@@ -24,35 +25,43 @@ export default function FileUploader({
     };
 
     return (
-        <div className="w-full max-w-md p-4 mx-auto bg-white rounded-xl shadow-md space-y-4 dark:bg-gray-800">
-            <h2 className="text-lg font-semibold text-center text-gray-800 dark:text-gray-100">
-                {title}
-            </h2>
-            <div className="flex items-center space-x-2">
-                <Button className="w-1/3" type="button">
-                    <label className="cursor-pointer">
-                        Select File
+        <div className="w-full max-w-md">
+            <Card>
+                <CardHeader>
+                    <h2 className="text-lg font-semibold text-center">
+                        {title}
+                    </h2>
+                </CardHeader>
+                <CardBody>
+                    <div className="flex items-center space-x-2">
+                        <Button className="w-1/3" type="button">
+                            <label className="cursor-pointer">
+                                Select File
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    className="hidden"
+                                    onChange={handleSelect}
+                                />
+                            </label>
+                        </Button>
                         <input
-                            type="file"
-                            className="hidden"
-                            onChange={handleSelect}
+                            type="text"
+                            value={file ? file.name : "No File Selected"}
+                            className="w-full p-2 border border-gray-500 rounded-lg"
+                            readOnly
                         />
-                    </label>
-                </Button>
-                <div className="border border-gray-300 rounded-lg flex-1 p-2 dark:border-gray-600">
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {file ? file.name : "No file selected"}
-                    </span>
-                </div>
-            </div>
-            <Button
-                className="w-full"
-                type="button"
-                onClick={handleUpload}
-                disabled={!file}
-            >
-                Upload
-            </Button>
+                    </div>
+                    <Button
+                        className="w-full mt-4 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
+                        type="button"
+                        onClick={handleUpload}
+                        disabled={!file}
+                    >
+                        Upload
+                    </Button>
+                </CardBody>
+            </Card>
         </div>
     );
 }
