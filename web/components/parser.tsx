@@ -26,6 +26,7 @@ export default function Parser() {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     const handleUpload = async (file: File) => {
+        setImage(null);
         setLoading(true);
         try {
             const result = await qrcodeParser(file);
@@ -40,13 +41,25 @@ export default function Parser() {
     };
 
     const handleUrlUpload = async (url: string) => {
+        setImage(null);
         setLoading(true);
         url = "https://no-cors.apocalypse.workers.dev/?url=" + url;
+
+        const timeout = (ms: number) =>
+            new Promise((_, reject) =>
+                setTimeout(() => reject(new Error("Request timed out")), ms),
+            );
+
         try {
-            const result = await qrcodeParser(url);
+            const result = (await Promise.race([
+                qrcodeParser(url),
+                timeout(3000),
+            ])) as string | null;
+
             setParsedResult(result);
             setImage(url);
         } catch (e) {
+            console.error(e);
             setImage(null);
             onOpen();
         }
