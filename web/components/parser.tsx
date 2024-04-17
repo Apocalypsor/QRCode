@@ -12,9 +12,7 @@ export default function Parser() {
     const [image, setImage] = useState<string | null>(null);
 
     const handleUpload = (file: File) => {
-        setParsedResult(
-            "123131232131231asfasfasfasf1231231231231231231232312321212.123123123123123",
-        );
+        setParsedResult("123131232131231asfasfasfasf123123123123");
         setImage(URL.createObjectURL(file));
     };
 
@@ -25,38 +23,29 @@ export default function Parser() {
         setImage(url);
     };
 
+    const UploadCards = (
+        <>
+            <FileUploader
+                title={"Upload Your QR Code"}
+                onUpload={handleUpload}
+            />
+            <UrlUploader
+                title={"Enter URL of QR Code"}
+                onUpload={handleUrlUpload}
+            />
+        </>
+    );
+
     return (
         <div className={"flex flex-col items-center justify-center gap-4"}>
-            <h2 className={"text-3xl font-semibold"}>
-                Upload a image & Enter a URL
-            </h2>
+            <h2 className={"text-3xl font-semibold"}>Parse images & URLs</h2>
 
-            <div className="flex gap-4 hidden md:flex">
-                <FileUploader
-                    title={"Upload Your QR Code"}
-                    onUpload={handleUpload}
-                />
+            <div className="flex gap-4 hidden md:flex">{UploadCards}</div>
 
-                <UrlUploader
-                    title={"Enter URL of QR Code"}
-                    onUpload={handleUrlUpload}
-                />
-            </div>
-
-            <div className={"flex flex-col gap-4 md:hidden"}>
-                <FileUploader
-                    title={"Upload Your QR Code"}
-                    onUpload={handleUpload}
-                />
-
-                <UrlUploader
-                    title={"Enter URL of QR Code"}
-                    onUpload={handleUrlUpload}
-                />
-            </div>
+            <div className="flex flex-col gap-4 md:hidden">{UploadCards}</div>
 
             {image && (
-                <div>
+                <div className={"mt-8"}>
                     <Card>
                         <CardHeader
                             className={"flex flex-col break-words max-w-md"}

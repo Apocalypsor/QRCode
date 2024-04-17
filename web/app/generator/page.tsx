@@ -1,5 +1,5 @@
-import QrGenerator from "../../components/qr-generator";
+import Generator from "@/components/generator";
 
 export default function Page() {
-    return <QrGenerator />;
+    return <Generator />;
 }
