@@ -33,6 +33,8 @@ pipenv install
 pipenv run python main.py
 ```
 
+You can access api documentation at http://127.0.0.1:8000/docs.
+
 ### Test
 
 ```bash
