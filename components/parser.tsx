@@ -43,11 +43,13 @@ export default function Parser() {
 
     const handleUrlUpload = async (url: string) => {
         setImage(null);
+        if (!url) {
+            onOpen();
+            return;
+        }
+
         setLoading(true);
         const proxyUrl = window.location.origin + "/api/proxy?url=" + url;
-        if (window.location.origin.includes("localhost")) {
-            url = proxyUrl;
-        }
 
         const timeout = (ms: number) =>
             new Promise((_, reject) =>
