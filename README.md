@@ -71,6 +71,8 @@ pnpm install
 pnpm run dev
 ```
 
+Now, you can access the app at http://localhost:3000.
+
 ## License
 
 Licensed under the [Apache License, Version 2.0](LICENSE).
