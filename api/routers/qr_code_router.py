@@ -2,15 +2,14 @@ from io import BytesIO
 
 from fastapi import APIRouter, Body, UploadFile
 from fastapi.responses import StreamingResponse
-from starlette.responses import PlainTextResponse
-
-from api.models.generator import TextGenerator
-from api.models.parser import UrlParser
-from api.services.qr_code_service import (
+from models.generator import TextGenerator
+from models.parser import UrlParser
+from services.qr_code_service import (
     decode_qr_code,
     fetch_and_decode,
     generate_qr_code,
 )
+from starlette.responses import PlainTextResponse
 
 router = APIRouter()
 
