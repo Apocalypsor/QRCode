@@ -15,6 +15,8 @@ cd api
 
 #### Install dependencies
 
+Python 3.12 is REQUIRED.
+
 First, you should have [pipenv](https://pipenv.pypa.io/en/latest/installation.html) installed. If you don't have it, you can install it using the following command:
 ```bash
 pip install pipenv
