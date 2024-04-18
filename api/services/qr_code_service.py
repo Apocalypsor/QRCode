@@ -16,6 +16,9 @@ async def decode_qr_code(file: UploadFile):
 
 
 async def fetch_and_decode(url: str):
+    if not url:
+        raise HTTPException(status_code=400, detail="URL not provided")
+
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             if response.status != 200:
@@ -25,13 +28,17 @@ async def fetch_and_decode(url: str):
 
 
 def decode_qr_code_from_file(file: bytes):
-    image = cv2.cvtColor(
-        cv2.imdecode(np.frombuffer(file, np.uint8), cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB
-    )
-    result = qreader.detect_and_decode(image=image)
-    if not result:
-        raise HTTPException(status_code=404, detail="No QR code found")
-    return "\n".join(result)
+    try:
+        image = cv2.cvtColor(
+            cv2.imdecode(np.frombuffer(file, np.uint8), cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB
+        )
+        result = qreader.detect_and_decode(image=image)
+        if not result:
+            raise HTTPException(status_code=404, detail="No QR code found")
+        return "\n".join(result)
+    except Exception as e:
+        print(e)
+        raise HTTPException(status_code=400, detail=str(e))
 
 
 def generate_qr_code(text: str):

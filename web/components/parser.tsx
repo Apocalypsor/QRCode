@@ -3,6 +3,7 @@
 import FileUploader from "@/components/file-uploader";
 import { title } from "@/components/primitives";
 import UrlUploader from "@/components/url-uploader";
+import { apiConfig } from "@/config/site";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
@@ -16,6 +17,7 @@ import {
     useDisclosure,
 } from "@nextui-org/modal";
 import { Spinner } from "@nextui-org/spinner";
+import axios from "axios";
 import Image from "next/image";
 import qrcodeParser from "qrcode-parser";
 import { useState } from "react";
@@ -44,7 +46,6 @@ export default function Parser() {
     const handleUrlUpload = async (url: string) => {
         setImage(null);
         setLoading(true);
-        url = "https://no-cors.apocalypse.workers.dev/" + url;
 
         const timeout = (ms: number) =>
             new Promise((_, reject) =>
@@ -53,12 +54,12 @@ export default function Parser() {
 
         try {
             const result = (await Promise.race([
-                qrcodeParser(url),
+                axios.post(apiConfig.url + "parse-qr-from-url", { url }),
                 timeout(3000),
-            ])) as string | null;
+            ])) as { data: string };
 
-            setParsedResult(result);
-            setImage(url);
+            setParsedResult(result.data);
+            setImage("https://no-cors.apocalypse.workers.dev/" + url);
         } catch (e) {
             console.error(e);
             setImage(null);
