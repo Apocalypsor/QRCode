@@ -44,8 +44,10 @@ export default function Parser() {
     const handleUrlUpload = async (url: string) => {
         setImage(null);
         setLoading(true);
-        url = window.location.origin + "/api/proxy?url=" + url;
-        console.log(url);
+        const proxyUrl = window.location.origin + "/api/proxy?url=" + url;
+        if (window.location.origin.includes("localhost")) {
+            url = proxyUrl;
+        }
 
         const timeout = (ms: number) =>
             new Promise((_, reject) =>
@@ -54,7 +56,7 @@ export default function Parser() {
 
         try {
             const result = (await Promise.race([
-                qrcodeParser(url),
+                qrcodeParser(proxyUrl),
                 timeout(3000),
             ])) as string | null;
 
