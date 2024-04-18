@@ -1,15 +1,37 @@
 "use client";
 
 import { title } from "@/components/primitives";
+import { apiConfig } from "@/config/site";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Textarea } from "@nextui-org/input";
-import QrSvg from "@wojtekmaj/react-qr-svg";
+import axios from "axios";
+import Image from "next/image";
 import React, { useState } from "react";
 
 export default function Generator() {
     const [text, setText] = useState<string>("");
     const [image, setImage] = useState<string | null>(null);
+
+    const handleGenerate = async (text: string) => {
+        try {
+            const res = await axios.get(apiConfig.url + "generate-qr", {
+                params: { text },
+                responseType: "arraybuffer", // specify that the response data should be read as a binary stream
+            });
+
+            // Create a new Blob object from the response data
+            const blob = new Blob([res.data], { type: "image/png" });
+
+            // Create an object URL for the Blob object
+            const objectURL = URL.createObjectURL(blob);
+
+            // Set the image state to the object URL
+            setImage(objectURL);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <div className="flex flex-col items-center justify-center gap-4">
@@ -31,7 +53,9 @@ export default function Generator() {
                     <Button
                         className="w-full mt-4 bg-gradient-to-t from-[#00b7fa] to-[#01cfea] text-white p-2 rounded-lg hover:bg-cyan-800"
                         onClick={() => {
-                            setImage(text);
+                            handleGenerate(text).then(() => {
+                                console.log("QR code generated");
+                            });
                         }}
                     >
                         Generate QR Code
@@ -42,7 +66,12 @@ export default function Generator() {
             {image && (
                 <Card className="mt-8">
                     <CardBody>
-                        <QrSvg value={image} width={300} />
+                        <Image
+                            src={image}
+                            width={300}
+                            height={300}
+                            alt="QR code"
+                        />
                     </CardBody>
                 </Card>
             )}

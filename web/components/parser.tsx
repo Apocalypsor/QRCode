@@ -19,7 +19,6 @@ import {
 import { Spinner } from "@nextui-org/spinner";
 import axios from "axios";
 import Image from "next/image";
-import qrcodeParser from "qrcode-parser";
 import { useState } from "react";
 
 export default function Parser() {
@@ -32,8 +31,19 @@ export default function Parser() {
         setImage(null);
         setLoading(true);
         try {
-            const result = await qrcodeParser(file);
-            setParsedResult(result);
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const result = await axios.post(
+                apiConfig.url + "parse-qr",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                },
+            );
+            setParsedResult(result.data);
             setImage(URL.createObjectURL(file));
         } catch (e) {
             setImage(null);
