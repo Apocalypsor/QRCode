@@ -12,8 +12,9 @@ python-multipart = "*"
 qreader = "*"
 opencv-python = "*"
 numpy = "*"
-
-[dev-packages]
+pytest = "*"
+pytest-asyncio = "*"
+httpx = "*"
 
 [requires]
 python_version = "3.12"

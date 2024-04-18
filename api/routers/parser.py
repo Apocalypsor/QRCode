@@ -33,21 +33,6 @@ async def parse_qr_from_url(url_parser: UrlParser):
     return await fetch_and_decode(url_parser.url)
 
 
-@router.post("/batch-parse-qr", response_class=JSONResponse)
-async def batch_parse_qr(files: List[UploadFile] = Body(...)):
-    """
-    Parse a batch of QR codes from the given files
-    :param files: List[UploadFile]
-    :return: JSONResponse
-    """
-
-    results = []
-    for file in files:
-        result = await decode_qr_code(file)
-        results.append(result)
-    return JSONResponse(content=results)
-
-
 @router.post("/batch-parse-qr-from-urls", response_class=JSONResponse)
 async def batch_parse_qr_from_urls(url_parser: List[UrlParser] = Body(...)):
     """
