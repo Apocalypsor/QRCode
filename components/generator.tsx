@@ -15,7 +15,7 @@ export default function Generator() {
         <div className="flex flex-col items-center justify-center gap-4">
             <h1 className={title({ color: "cyan" })}>Generate QR Code</h1>
 
-            <Card className={"w-2/3 md:w-2/5"}>
+            <Card className={"w-full md:w-2/5"}>
                 <CardHeader>
                     <h2 className="text-lg font-semibold text-center">
                         {"You can enter text here"}
