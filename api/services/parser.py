@@ -1,7 +1,8 @@
+import re
+
 import aiohttp
 import cv2
 import numpy as np
-import qrcode
 from fastapi import HTTPException, UploadFile
 from qreader import QReader
 
@@ -30,7 +31,8 @@ async def fetch_and_decode(url: str):
 def decode_qr_code_from_file(file: bytes):
     try:
         image = cv2.cvtColor(
-            cv2.imdecode(np.frombuffer(file, np.uint8), cv2.IMREAD_COLOR), cv2.COLOR_BGR2RGB
+            cv2.imdecode(np.frombuffer(file, np.uint8), cv2.IMREAD_COLOR),
+            cv2.COLOR_BGR2RGB,
         )
         result = qreader.detect_and_decode(image=image)
         if not result:
@@ -41,5 +43,14 @@ def decode_qr_code_from_file(file: bytes):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-def generate_qr_code(text: str):
-    return qrcode.make(text)
+async def parse_wifi_credentials(file: UploadFile):
+    result = decode_qr_code_from_file(await file.read())
+    wifi_pattern = re.compile(r"^WIFI:T:(WPA|WEP|);S:(.+);P:(.+);;")
+    match = wifi_pattern.search(result)
+    if match:
+        security = match.group(1)
+        ssid = match.group(2)
+        password = match.group(3)
+        return {"SSID": ssid, "Password": password, "Security": security}
+    else:
+        return "QR code does not contain valid WiFi access information."

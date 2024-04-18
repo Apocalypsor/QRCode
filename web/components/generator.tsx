@@ -15,10 +15,18 @@ export default function Generator() {
 
     const handleGenerate = async (text: string) => {
         try {
-            const res = await axios.get(apiConfig.url + "generate-qr", {
-                params: { text },
-                responseType: "arraybuffer", // specify that the response data should be read as a binary stream
-            });
+            const res = await axios.post(
+                apiConfig.url + "generate-qr",
+                {
+                    text,
+                },
+                {
+                    responseType: "arraybuffer",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                },
+            );
 
             // Create a new Blob object from the response data
             const blob = new Blob([res.data], { type: "image/png" });
@@ -37,7 +45,7 @@ export default function Generator() {
         <div className="flex flex-col items-center justify-center gap-4">
             <h1 className={title({ color: "cyan" })}>Generate QR Code</h1>
 
-            <Card className={"w-2/3 md:w-2/5"}>
+            <Card className={"w-full md:w-2/5"}>
                 <CardHeader>
                     <h2 className="text-lg font-semibold text-center">
                         {"You can enter text here"}
