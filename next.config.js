@@ -3,10 +3,16 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
+                protocol: "http",
+                hostname: "localhost",
+            },
+            {
                 protocol: "https",
-                hostname: "no-cors.apocalypse.workers.dev",
-                port: "",
-                pathname: "/**",
+                hostname: "**.vercel.app",
+            },
+            {
+                protocol: "https",
+                hostname: "**.dov.moe",
             },
         ],
     },
