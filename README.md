@@ -15,7 +15,7 @@ cd api
 
 #### Install dependencies
 
-Python 3.12 is REQUIRED.
+**Python 3.12 is REQUIRED.**
 
 First, you should have [pipenv](https://pipenv.pypa.io/en/latest/installation.html) installed. If you don't have it, you can install it using the following command:
 ```bash
@@ -35,7 +35,7 @@ pipenv install
 pipenv run python main.py
 ```
 
-You can access api documentation at http://127.0.0.1:8000/docs.
+You can access api documentation at http://localhost:8000/docs.
 
 ### Test
 
@@ -63,6 +63,9 @@ cd web
 
 #### Install dependencies
 
+First, you should have [pnpm](https://pnpm.io/installation) installed.
+
+Then, run the following command:
 ```bash
 pnpm install
 ```
