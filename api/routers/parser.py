@@ -8,6 +8,7 @@ from starlette.responses import JSONResponse, PlainTextResponse
 from models.parser import UrlParser
 from services.parser import decode_qr_code, fetch_and_decode, parse_wifi_credentials
 
+# Create a new FastAPI router
 router = APIRouter()
 
 
