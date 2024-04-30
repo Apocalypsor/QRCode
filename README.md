@@ -15,24 +15,17 @@ cd api
 
 #### Install dependencies
 
-**Python 3.12 is REQUIRED.**
-
-First, you should have [pipenv](https://pipenv.pypa.io/en/latest/installation.html) installed. If you don't have it, you can install it using the following command:
-```bash
-pip install pipenv
-```
-
-Also, Install zbar according to [this document](https://github.com/Eric-Canas/qreader).
+First, Install zbar according to [this document](https://github.com/Eric-Canas/qreader).
 
 Then, you can install the dependencies using the following command:
 ```bash
-pipenv install
+pip install -r requirements.txt
 ```
 
 ### Run the development server
 
 ```bash
-pipenv run python main.py
+python main.py
 ```
 
 You can access api documentation at http://localhost:8000/docs.
@@ -40,7 +33,7 @@ You can access api documentation at http://localhost:8000/docs.
 ### Test
 
 ```bash
-pipenv run pytest tests
+pytest tests
 ```
 
 ## Frontend
@@ -76,7 +69,7 @@ pnpm install
 pnpm run dev
 ```
 
-Now, you can access the app at http://localhost:3000.
+Now, you can access the app at http://localhost:3000. The backend server should be running at http://localhost:8000 at the same time.
 
 ## License
 
